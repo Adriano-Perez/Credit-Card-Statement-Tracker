@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    /* Flat solid background — no gradient, no blurred glow blobs. */
+    @apply bg-base-950 text-ink-primary antialiased;
+    font-feature-settings: "tnum" on;
+  }
+
+  ::selection {
+    @apply bg-bank-red/40 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Glassmorphism via blur + border only — flat semi-transparent fill,
+     no color gradient anywhere in the stack. */
+  .glass {
+    @apply relative rounded-card border border-white/10 bg-white/[0.05]
+      shadow-glass backdrop-blur-xl;
+  }
+
+  .glass-inner {
+    @apply rounded-control border border-white/[0.08] bg-white/[0.04];
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950;
+  }
+
+  .btn-primary {
+    @apply rounded-control bg-bank-red px-4 py-3 text-sm font-semibold text-white transition hover:opacity-80 active:scale-[0.97];
+  }
+
+  .btn-secondary {
+    @apply rounded-control bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.14] active:scale-[0.97];
+  }
+
+  .btn-danger {
+    @apply rounded-control bg-bank-darkred px-4 py-3 text-sm font-semibold text-white transition hover:opacity-80 active:scale-[0.97];
+  }
+
+  .field {
+    @apply glass-inner w-full rounded-control px-3.5 py-3 text-sm text-white outline-none focus-within:border-white/25;
+  }
+
+  .field-inner {
+    @apply tabular w-full bg-transparent text-sm text-white placeholder-white/20 outline-none;
+  }
+}
