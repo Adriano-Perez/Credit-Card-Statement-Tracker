@@ -1,154 +1,304 @@
-# Vault — Premium Credit Card Manager
+# 💳 Credit Card Statement Tracker
 
-A full interest-accrual engine for a credit card statement, not just a
-calculator: it tracks the grace period, locks in rates per-transaction,
-auto-applies late fees and penalty APR the moment a payment is missed,
-and shows a recovery plan to get back to normal.
+A modern, interactive web application for tracking credit card statements, payments, purchases, interest, APR changes, and overall balance history.
 
-## The core rule this app is built around
+Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application provides a simple dashboard for understanding how credit card balances change over time.
 
-**Interest does not start on the statement date — only after the due
-date passes, and only on what's left unpaid.**
+## 🚀 Features
 
+### 📄 Statement Management
+
+* Create and manage credit card statements
+* Track statement dates and payment due dates
+* Record statement balances
+* Edit or delete existing statements
+
+### 💰 Payment Tracking
+
+* Record credit card payments
+* Track minimum payments
+* Apply payments toward outstanding balances
+* View payment history
+
+### 🛍️ Purchase Tracking
+
+* Record individual purchases
+* Add optional purchase categories
+* Track purchases against the current balance
+* View purchases in the transaction history
+
+### 📈 Interest Calculations
+
+* Calculate accrued credit card interest
+* Track interest based on APR
+* Monitor how interest affects the outstanding balance
+* View interest as part of the overall balance breakdown
+
+### 📊 Balance Visualization
+
+* Interactive doughnut chart
+* Visual breakdown of balance components
+* Detailed information for individual balance categories
+* Easy-to-understand financial overview
+
+### 📉 APR & Rate History
+
+* Record APR changes
+* Set effective dates for new rates
+* Maintain a historical record of rate changes
+* Track how changing interest rates affect calculations
+
+### 🧾 Transaction History
+
+* Complete transaction log
+* Payments
+* Purchases
+* Interest
+* Statement activity
+* Edit transaction records when needed
+
+### ⚠️ Missed Payment Recovery
+
+* Handle missed payments
+* Track recovery options
+* Account for late-payment situations
+* Keep recovery activity within the transaction history
+
+## 🛠️ Tech Stack
+
+| Technology          | Purpose                        |
+| ------------------- | ------------------------------ |
+| **Next.js 14**      | Application framework          |
+| **React 18**        | UI development                 |
+| **TypeScript**      | Type-safe development          |
+| **Tailwind CSS**    | Styling                        |
+| **Framer Motion**   | Animations and transitions     |
+| **Chart.js**        | Data visualization             |
+| **react-chartjs-2** | React integration for Chart.js |
+| **Lucide React**    | Icons                          |
+| **React Hooks**     | State management               |
+| **Local Storage**   | Data persistence               |
+
+## 📦 Installation
+
+### Prerequisites
+
+Make sure you have:
+
+* [Node.js](https://nodejs.org/) 18 or higher
+* npm or yarn
+* Git
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/Adriano-Perez/Credit-Card-Statement-Tracker.git
+cd Credit-Card-Statement-Tracker
 ```
-Statement Date  →  Grace Period (no interest)  →  Due Date
-                                                      │
-                              paid in full? ──yes──►  done, no interest
-                                     │no
-                                     ▼
-                     paid ≥ minimum?  ──yes──► interest accrues on the
-                                                leftover only, at your
-                                                card's normal APR
-                                     │no
-                                     ▼
-                     Late fee + penalty APR (29.99% default) applied
-                     automatically. Interest now accrues on the full
-                     previous balance until you pay enough to catch up.
-```
 
-## Stack
-
-- Next.js 14 (App Router) + TypeScript — fully typed, no `any`
-- Tailwind CSS — flat, glassmorphism dark theme, **no gradients anywhere**
-  (every color is a solid fill; meaning lives in which color is used,
-  not in blending between them)
-- Chart.js + react-chartjs-2 (4-slice doughnut, click-to-inspect)
-- Framer Motion (page/card/list/modal animations)
-- lucide-react (icons)
-- Browser `localStorage` — no backend, no server, no accounts
-
-## Getting started
-
-Requires Node.js 18.17+ (Node 20 LTS recommended).
+### Install Dependencies
 
 ```bash
 npm install
+```
+
+### Start the Development Server
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). It's mobile-first —
-try it in your browser's device toolbar or on your phone (same wifi:
-`npm run dev -- -H 0.0.0.0`, then visit your computer's LAN IP from
-your phone).
+Then open:
+
+```text
+http://localhost:3000
+```
+
+## 📁 Project Structure
+
+```text
+Credit-Card-Statement-Tracker/
+│
+├── app/
+│   ├── page.tsx
+│   └── layout.tsx
+│
+├── components/
+│   ├── modals/
+│   │   ├── AddStatementModal.tsx
+│   │   ├── EditStatementModal.tsx
+│   │   ├── MakePaymentModal.tsx
+│   │   ├── AddPurchaseModal.tsx
+│   │   ├── AddRateChangeModal.tsx
+│   │   ├── EditTransactionModal.tsx
+│   │   └── MissedRecoveryModal.tsx
+│   │
+│   ├── Header.tsx
+│   ├── StatCard.tsx
+│   ├── AlertBanner.tsx
+│   ├── BalanceDoughnut.tsx
+│   ├── SliceDetailSheet.tsx
+│   ├── RateBreakdown.tsx
+│   ├── TransactionLog.tsx
+│   ├── RateHistoryTimeline.tsx
+│   └── HistoryTable.tsx
+│
+├── hooks/
+│   └── useLedger.ts
+│
+├── lib/
+│   ├── calculations.ts
+│   ├── dates.ts
+│   ├── storage.ts
+│   └── format.ts
+│
+├── types/
+│   └── index.ts
+│
+├── public/
+│
+├── package.json
+└── README.md
+```
+
+## 🎯 How to Use
+
+### Adding a Statement
+
+1. Select **Add Statement**.
+2. Enter the statement information.
+3. Provide the statement date and payment due date.
+4. Enter the applicable balances.
+5. Submit the statement.
+
+The application will begin tracking activity associated with the statement.
+
+### Making a Payment
+
+1. Select **Make Payment**.
+2. Enter the payment amount.
+3. Confirm the payment.
+4. The payment is added to the transaction history and applied to the tracked balance.
+
+### Recording a Purchase
+
+1. Select **Add Purchase**.
+2. Enter the purchase amount.
+3. Optionally select or enter a category.
+4. Submit the purchase.
+
+The purchase will be reflected in the current balance and transaction history.
+
+### Managing APR Changes
+
+1. Select **Rate Change**.
+2. Enter the new APR.
+3. Enter the effective date.
+4. Save the change.
+
+The application maintains the rate history so previous APRs can be reviewed.
+
+## 💾 Data Persistence
+
+This application uses the browser's **localStorage** to persist data.
+
+That means:
+
+* No external database is required.
+* Data remains available between browser sessions.
+* Your financial data stays stored locally in your browser.
+* The application can run without a backend database.
+
+> **Important:** Clearing your browser's site data/localStorage can remove your saved application data. Export/backup functionality should be used if implemented in the application.
+
+## 🧮 Financial Calculations
+
+The application is designed to help visualize and track credit card activity, including:
+
+* Outstanding balances
+* Payments
+* Purchases
+* APR changes
+* Accrued interest
+* Transaction history
+
+Interest calculations are implemented in:
+
+```text
+lib/calculations.ts
+```
+
+Date-related calculations are handled in:
+
+```text
+lib/dates.ts
+```
+
+## 🧪 Development
+
+### Run the Development Server
 
 ```bash
-npm run build   # production build
-npm run start   # serve the production build
+npm run dev
 ```
 
-## How the money math works
+### Build for Production
 
-**The four balance buckets** (`lib/calculations.ts` → `deriveStatement`):
-
-| Slice | Color | What it is | When it shows |
-|---|---|---|---|
-| Safe | Green | Previous statement balance | Still in the grace period |
-| New spending | Gold | Current balance − previous balance | Always, if there's new spending |
-| Accruing | Red | Previous balance − amount paid | Past due, minimum was paid |
-| Past due | Dark red | Previous balance − amount paid | Past due, minimum was **not** paid |
-
-**Rate locking**: every purchase and every statement stores the rate
-that was active *on that date* (`getRateForDate`). Logging a new rate
-change (Settings → or the "Rate change" action) only ever affects
-things dated after it — nothing already on the books is touched.
-
-**Missed payment flow**: `applyMissedPaymentIfNeeded` runs on every
-load. The moment it sees a statement past its due date with less than
-the minimum paid, it applies your settings' late fee and penalty APR
-exactly once (idempotent — safe to check repeatedly) and logs a
-missed-payment record. The penalty stays active — even if you later
-pay more than the original minimum — until `allocatePayment` sees the
-leftover and late fee both fully cleared. That's "recovery."
-
-**Payment allocation**, in order: late fees first, then the previous
-balance's leftover (whatever color it's currently drawn as), then new
-spending. Implemented in `allocatePayment`.
-
-**Credit utilization**: each statement locks in the credit limit that
-was active when it was created (same pattern as rate locking), so a
-later limit increase or decrease never rewrites a past period's
-reported utilization. Two more stat cards cover it — Usable credit
-(`limit − current balance`) and Utilization (`current balance ÷ limit
-× 100`, color-coded green/gold/red at the usual 30%/50% bureau-style
-bands) — and every statement in the history table logs its own
-Limit and Util. columns, so you can see the trend period to period.
-
-## Settings (the "edit your bank's numbers" page)
-
-`/settings` lets you match the app to your actual card: bank name,
-fixed or variable APR (prime + margin), penalty APR, late fee amount,
-and default grace period length. Saved to `localStorage` and used for
-every new statement/purchase/interest calculation from then on.
-
-**Important limitation, stated plainly**: this is per-browser,
-per-device storage — there's no account or server, so settings (and
-all your statement data) won't sync between your phone and your
-computer automatically. The layout itself is fully responsive (phone
-→ tablet → desktop, same codebase, no separate "mobile app"), but the
-*data* stays wherever you entered it unless you manually re-enter it
-on the other device.
-
-## Project structure
-
-```
-app/
-  page.tsx              Main dashboard
-  settings/page.tsx      Editable bank defaults (APR, fees, grace period)
-  layout.tsx             Root layout, Inter font, flat dark background
-  globals.css             Tailwind layers + flat glass utility classes
-hooks/
-  useLedger.ts            All state: statements, transactions, rate
-                          history, missed payments, settings — load,
-                          persist, derive, and every action (add
-                          statement, make payment, add purchase, add
-                          rate change, delete)
-components/
-  Header.tsx, AlertBanner.tsx, StatCard.tsx
-  BalanceDoughnut.tsx     4-slice doughnut, clickable
-  SliceDetailSheet.tsx    Bottom sheet explaining a clicked slice
-  RateBreakdown.tsx, RateHistoryTimeline.tsx, TransactionLog.tsx
-  HistoryTable.tsx        Past statements
-  BottomSheet.tsx         Shared modal/sheet shell
-  modals/                 Add Statement, Make Payment, Add Purchase,
-                          Add Rate Change, Missed-Payment Recovery
-lib/
-  calculations.ts         Interest math, rate locking, payment
-                          allocation, rate breakdown — all pure functions
-  dates.ts                YYYY-MM-DD date-string helpers (no timezone bugs)
-  storage.ts               localStorage read/write for every collection
-types/
-  index.ts                 Every shared type + DEFAULT_SETTINGS
+```bash
+npm run build
 ```
 
-## What's intentionally not included
+### Start the Production Build
 
-The original spec's "additional features to consider" list — What-If
-payment calculator, 30/60/90-day interest projection, push-style due
-date reminders, CSV/JSON export, spending-by-category charts, a credit
-score simulator, and live Prime-rate feed notifications — are out of
-scope for this build. They're genuinely separate features (some need
-a backend or a live data feed this client-only app doesn't have), not
-oversights. Everything under "Core Business Logic" in the spec —
-accrual timing, rate locking, the four-slice breakdown, payment status
-logic, missed-payment handling, and payment allocation priority — is
-implemented and covered above.
+```bash
+npm start
+```
+
+### Run Linting
+
+```bash
+npm run lint
+```
+
+## 🔐 Privacy
+
+The application is designed around local data storage and does not require users to connect a bank or credit card account.
+
+No external financial account connection is required to use the tracker.
+
+## 🗺️ Future Improvements
+
+Potential future features include:
+
+* 📤 Export statements and transactions
+* 📥 Import transaction data
+* 📊 Additional financial charts
+* 🔔 Payment due-date reminders
+* 💵 Multiple credit card support
+* 📱 Improved mobile experience
+* 🌙 Dark mode
+* ☁️ Optional cloud synchronization
+* 📈 More detailed interest projections
+* 📋 CSV/PDF statement exports
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+If you'd like to contribute:
+
+```bash
+git checkout -b feature/your-feature
+```
+
+Make your changes, commit them, and open a pull request.
+
+## 📝 License
+
+This project is licensed under the **MIT License**.
+
+## 👤 Author
+
+**Adriano Perez**
+
+GitHub: [@Adriano-Perez](https://github.com/Adriano-Perez)
