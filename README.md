@@ -1,8 +1,10 @@
 # 💳 Credit Card Statement Tracker
 
-A modern, interactive web application for tracking credit card statements, payments, purchases, interest, APR changes, and overall balance history.
+A modern, interactive web application for tracking credit card statements, payments, purchases, interest, APR changes, credit utilization, and transaction history.
 
-Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application provides a simple dashboard for understanding how credit card balances change over time.
+Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application provides a centralized dashboard for understanding how credit card balances and activity change over time.
+
+> 🚧 **This project is actively under development.** Features and calculations are still being refined, including transaction editing, real-time credit utilization, and several smaller application operations.
 
 ## 🚀 Features
 
@@ -11,7 +13,8 @@ Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application pro
 * Create and manage credit card statements
 * Track statement dates and payment due dates
 * Record statement balances
-* Edit or delete existing statements
+* Edit and delete statements
+* Track statement history
 
 ### 💰 Payment Tracking
 
@@ -19,6 +22,7 @@ Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application pro
 * Track minimum payments
 * Apply payments toward outstanding balances
 * View payment history
+* Update balances dynamically after payments
 
 ### 🛍️ Purchase Tracking
 
@@ -31,38 +35,53 @@ Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application pro
 
 * Calculate accrued credit card interest
 * Track interest based on APR
-* Monitor how interest affects the outstanding balance
-* View interest as part of the overall balance breakdown
+* Monitor how interest affects outstanding balances
+* Include interest activity in the transaction history
 
-### 📊 Balance Visualization
+### 📊 Credit Utilization
 
-* Interactive doughnut chart
-* Visual breakdown of balance components
-* Detailed information for individual balance categories
-* Easy-to-understand financial overview
+* Track credit card utilization
+* Display utilization based on the current balance and credit limit
+* Update utilization as purchases and payments are recorded
+* Provide a real-time view of current credit usage
 
 ### 📉 APR & Rate History
 
 * Record APR changes
 * Set effective dates for new rates
-* Maintain a historical record of rate changes
-* Track how changing interest rates affect calculations
+* Maintain historical APR records
+* Track how rate changes affect interest calculations
 
 ### 🧾 Transaction History
 
-* Complete transaction log
-* Payments
-* Purchases
-* Interest
-* Statement activity
-* Edit transaction records when needed
+* Maintain a complete transaction log
+* Track purchases, payments, interest, and other activity
+* Edit transaction records
+* Delete or correct transactions
+* Keep balances synchronized with transaction activity
 
 ### ⚠️ Missed Payment Recovery
 
 * Handle missed payments
 * Track recovery options
 * Account for late-payment situations
-* Keep recovery activity within the transaction history
+* Record recovery activity in the transaction history
+
+## 🚧 Current Development
+
+The application is currently being refined and expanded.
+
+### In Progress
+
+* ✏️ Improved transaction/log editing
+* 📊 Real-time credit utilization calculations
+* 🔄 Better synchronization between transactions and balances
+* 🧮 Refinements to interest calculations
+* ⚙️ Minor operational improvements
+* 🐛 Bug fixes and edge-case handling
+* 🎨 UI/UX refinements
+
+Features may change as development continues.
 
 ## 🛠️ Tech Stack
 
@@ -83,9 +102,7 @@ Built with **Next.js, React, TypeScript, and Tailwind CSS**, the application pro
 
 ### Prerequisites
 
-Make sure you have:
-
-* [Node.js](https://nodejs.org/) 18 or higher
+* Node.js 18 or higher
 * npm or yarn
 * Git
 
@@ -108,7 +125,7 @@ npm install
 npm run dev
 ```
 
-Then open:
+Open the application at:
 
 ```text
 http://localhost:3000
@@ -167,27 +184,26 @@ Credit-Card-Statement-Tracker/
 
 1. Select **Add Statement**.
 2. Enter the statement information.
-3. Provide the statement date and payment due date.
+3. Enter the statement and due dates.
 4. Enter the applicable balances.
-5. Submit the statement.
-
-The application will begin tracking activity associated with the statement.
+5. Save the statement.
 
 ### Making a Payment
 
 1. Select **Make Payment**.
 2. Enter the payment amount.
 3. Confirm the payment.
-4. The payment is added to the transaction history and applied to the tracked balance.
+4. The payment is added to the transaction history.
+5. The tracked balance and utilization update accordingly.
 
 ### Recording a Purchase
 
 1. Select **Add Purchase**.
 2. Enter the purchase amount.
-3. Optionally select or enter a category.
-4. Submit the purchase.
+3. Optionally add a category.
+4. Save the purchase.
 
-The purchase will be reflected in the current balance and transaction history.
+The purchase is added to the transaction history and reflected in the current balance.
 
 ### Managing APR Changes
 
@@ -196,33 +212,38 @@ The purchase will be reflected in the current balance and transaction history.
 3. Enter the effective date.
 4. Save the change.
 
-The application maintains the rate history so previous APRs can be reviewed.
+The application maintains the rate history for future calculations and reference.
+
+### Editing Transactions
+
+Transactions can be reviewed through the transaction log. Editing functionality is currently being refined to ensure that changes correctly update related balances and calculations.
 
 ## 💾 Data Persistence
 
-This application uses the browser's **localStorage** to persist data.
+The application currently uses the browser's **localStorage** for data persistence.
 
-That means:
+This means:
 
 * No external database is required.
-* Data remains available between browser sessions.
-* Your financial data stays stored locally in your browser.
-* The application can run without a backend database.
+* Data is stored locally in the browser.
+* Data persists between browser sessions.
+* No bank or credit card account connection is required.
 
-> **Important:** Clearing your browser's site data/localStorage can remove your saved application data. Export/backup functionality should be used if implemented in the application.
+> **Important:** Clearing browser site data or localStorage may remove saved application data.
 
-## 🧮 Financial Calculations
+## 🧮 Calculations
 
-The application is designed to help visualize and track credit card activity, including:
+The application includes calculations for:
 
-* Outstanding balances
+* Current balance
+* Credit utilization
 * Payments
 * Purchases
 * APR changes
 * Accrued interest
-* Transaction history
+* Transaction activity
 
-Interest calculations are implemented in:
+Core financial calculations are located in:
 
 ```text
 lib/calculations.ts
@@ -236,54 +257,55 @@ lib/dates.ts
 
 ## 🧪 Development
 
-### Run the Development Server
+### Development Server
 
 ```bash
 npm run dev
 ```
 
-### Build for Production
+### Production Build
 
 ```bash
 npm run build
 ```
 
-### Start the Production Build
+### Start Production Server
 
 ```bash
 npm start
 ```
 
-### Run Linting
+### Lint
 
 ```bash
 npm run lint
 ```
 
-## 🔐 Privacy
+## 🗺️ Planned Improvements
 
-The application is designed around local data storage and does not require users to connect a bank or credit card account.
+Future improvements may include:
 
-No external financial account connection is required to use the tracker.
-
-## 🗺️ Future Improvements
-
-Potential future features include:
-
-* 📤 Export statements and transactions
-* 📥 Import transaction data
-* 📊 Additional financial charts
+* 📤 Statement and transaction exports
+* 📥 Importing transaction data
+* 📊 Additional financial visualizations
 * 🔔 Payment due-date reminders
-* 💵 Multiple credit card support
+* 💳 Multiple credit card support
 * 📱 Improved mobile experience
 * 🌙 Dark mode
 * ☁️ Optional cloud synchronization
-* 📈 More detailed interest projections
-* 📋 CSV/PDF statement exports
+* 📈 Advanced interest projections
+* 📋 CSV/PDF exports
+* 🔐 Optional account-based data synchronization
+
+## 🔐 Privacy
+
+The application does not require users to connect a bank or credit card account.
+
+Financial information entered into the application is currently stored locally using browser localStorage.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome.
+Contributions, bug reports, issues, and feature requests are welcome.
 
 If you'd like to contribute:
 
